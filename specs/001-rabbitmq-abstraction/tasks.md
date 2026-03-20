@@ -2,25 +2,25 @@
 
 ## Phase 1 - Setup
 
-- [ ] T001 Create .NET class library project at src/RabbitClientEasyNetQ/RabbitClientEasyNetQ.csproj
+- [X] T001 Create .NET class library project at src/RabbitClientEasyNetQ/RabbitClientEasyNetQ.csproj
 - [ ] T002 Create test project at tests/RabbitClientEasyNetQ.Tests/RabbitClientEasyNetQ.Tests.csproj
-- [ ] T003 Add repository files: README.md, LICENSE, .editorconfig at repo root
+- [X] T003 Add repository files: README.md, LICENSE, .editorconfig at repo root
 
 ## Phase 2 - Foundational (blocking prerequisites)
 
-- [ ] T004 [P] [ ] Create Contracts: src/RabbitClientEasyNetQ/Contracts/IMessageBus.cs and src/RabbitClientEasyNetQ/Contracts/RabbitMqOptions.cs and src/RabbitClientEasyNetQ/Contracts/SubscriptionOptions.cs
-- [ ] T005 Create DI extension skeleton at src/RabbitClientEasyNetQ/Extensions/ServiceCollectionExtensions.cs
-- [ ] T006 Create internal EasyNetQ adapter skeleton at src/RabbitClientEasyNetQ/Internal/EasyNetQBusAdapter.cs
-- [ ] T007 [P] Create middleware abstractions at src/RabbitClientEasyNetQ/Middleware/IPublishMiddleware.cs and src/RabbitClientEasyNetQ/Middleware/IConsumeMiddleware.cs and src/RabbitClientEasyNetQ/Middleware/MiddlewarePipeline.cs
-- [ ] T008 Create observability primitives at src/RabbitClientEasyNetQ/Observability/IMessagingMetrics.cs and src/RabbitClientEasyNetQ/Observability/Correlation.cs
+- [X] T004 [P] [ ] Create Contracts: src/RabbitClientEasyNetQ/Contracts/IMessageBus.cs and src/RabbitClientEasyNetQ/Contracts/RabbitMqOptions.cs and src/RabbitClientEasyNetQ/Contracts/SubscriptionOptions.cs
+- [X] T005 Create DI extension skeleton at src/RabbitClientEasyNetQ/Extensions/ServiceCollectionExtensions.cs
+- [X] T006 Create internal EasyNetQ adapter skeleton at src/RabbitClientEasyNetQ/Internal/EasyNetQBusAdapter.cs
+- [X] T007 [P] Create middleware abstractions at src/RabbitClientEasyNetQ/Middleware/IPublishMiddleware.cs and src/RabbitClientEasyNetQ/Middleware/IConsumeMiddleware.cs and src/RabbitClientEasyNetQ/Middleware/MiddlewarePipeline.cs
+- [X] T008 Create observability primitives at src/RabbitClientEasyNetQ/Observability/IMessagingMetrics.cs and src/RabbitClientEasyNetQ/Observability/Correlation.cs
 - [ ] T009 Create configuration file type at src/RabbitClientEasyNetQ/Configuration/RabbitMqOptions.cs (if not in Contracts)
 - [ ] T010 Create integration test scaffold at tests/RabbitClientEasyNetQ.Tests/Integration/PublishSubscribeIntegrationTests.cs
 
 ## Phase 3 - User Story 1 (US1) - Basic publish/subscribe (Priority P1)
 
-- [ ] T011 [US1] Implement public interface file src/RabbitClientEasyNetQ/Contracts/IMessageBus.cs
-- [ ] T012 [US1] Implement MessageBus class (EasyNetQ-backed) at src/RabbitClientEasyNetQ/MessageBus.cs
-- [ ] T013 [US1] Implement PublishAsync<T> and SubscribeAsync<T> behavior mapping to EasyNetQ adapter at src/RabbitClientEasyNetQ/Internal/EasyNetQBusAdapter.cs
+- [X] T011 [US1] Implement public interface file src/RabbitClientEasyNetQ/Contracts/IMessageBus.cs
+- [X] T012 [US1] Implement MessageBus class (EasyNetQ-backed) at src/RabbitClientEasyNetQ/MessageBus.cs
+- [X] T013 [US1] Implement PublishAsync<T> and SubscribeAsync<T> behavior mapping to EasyNetQ adapter at src/RabbitClientEasyNetQ/Internal/EasyNetQBusAdapter.cs
 - [ ] T014 [P] [US1] Add example program demonstrating Publish/Subscribe at examples/basic/Program.cs
 - [ ] T015 [US1] Add unit tests for IMessageBus behavior at tests/RabbitClientEasyNetQ.Tests/Unit/MessageBusTests.cs
 - [ ] T016 [US1] Add integration test verifying end-to-end publish/subscribe at tests/RabbitClientEasyNetQ.Tests/Integration/PublishSubscribeIntegrationTests.cs
