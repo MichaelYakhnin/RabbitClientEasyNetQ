@@ -1,9 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitClientEasyNetQ.Contracts;
+using EasyNetQ;
 
 namespace RabbitClientEasyNetQ.Internal
 {
@@ -11,32 +13,72 @@ namespace RabbitClientEasyNetQ.Internal
     {
         private readonly RabbitMqOptions _options;
         private readonly ILogger<EasyNetQBusAdapter> _logger;
+        private readonly IServiceProvider _provider;
+        private readonly Lazy<IBus> _busLazy;
 
-        public EasyNetQBusAdapter(IOptions<RabbitMqOptions> options, ILogger<EasyNetQBusAdapter> logger)
+        public EasyNetQBusAdapter(IServiceProvider provider, ILogger<EasyNetQBusAdapter> logger)
         {
-            _options = options?.Value ?? new RabbitMqOptions();
+            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            // EasyNetQ wiring to be implemented in a follow-up change; keep adapter inert for now
-            _logger.LogInformation("EasyNetQBusAdapter initialized (wiring deferred)");
+            // Resolve options from DI if available
+            _options = _provider.GetService<IOptions<RabbitMqOptions>>()?.Value ?? new RabbitMqOptions();
+
+            // Lazily resolve IBus from the application's DI container; this enables using EasyNetQ's DI integration (services.AddEasyNetQ)
+            _busLazy = new Lazy<IBus>(() => _provider.GetRequiredService<IBus>(), LazyThreadSafetyMode.ExecutionAndPublication);
+
+            _logger.LogInformation("EasyNetQBusAdapter initialized (lazy DI-resolved IBus)");
         }
 
         public Task PublishAsync<T>(T message, CancellationToken ct = default)
         {
-            _logger.LogDebug("Publish requested for {Type} but adapter wiring is not implemented", typeof(T).FullName);
-            throw new NotImplementedException("EasyNetQ publish not implemented yet");
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
+            var bus = _busLazy.Value;
+            _logger.LogDebug("Publishing message of type {Type}", typeof(T).FullName);
+
+            return bus.PubSub.PublishAsync(message, ct);
         }
 
         public Task SubscribeAsync<T>(Func<T, CancellationToken, Task> handler, SubscriptionOptions? options = null, CancellationToken ct = default)
         {
-            _logger.LogDebug("Subscribe requested for {Type} but adapter wiring is not implemented", typeof(T).FullName);
-            throw new NotImplementedException("EasyNetQ subscribe not implemented yet");
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
+            var bus = _busLazy.Value;
+            var subscriptionId = options?.SubscriptionId ?? typeof(T).FullName ?? Guid.NewGuid().ToString();
+
+            _logger.LogDebug("Subscribing to message of type {Type} with subscription id {Id}", typeof(T).FullName, subscriptionId);
+
+            // EasyNetQ PubSub SubscribeAsync signature requires a configuration action and a cancellation token in recent versions
+            return bus.PubSub.SubscribeAsync<T>(subscriptionId, async (msg, msgCt) => await handler(msg, msgCt).ConfigureAwait(false), cfg => { }, ct);
         }
 
-        public ValueTask DisposeAsync()
+        public async ValueTask DisposeAsync()
         {
-            // no resources yet
-            return ValueTask.CompletedTask;
+            if (_busLazy.IsValueCreated)
+            {
+                try
+                {
+                    var bus = _busLazy.Value;
+
+                    if (bus is IAsyncDisposable asyncDisp)
+                    {
+                        await asyncDisp.DisposeAsync().ConfigureAwait(false);
+                    }
+                    else if (bus is IDisposable disp)
+                    {
+                        disp.Dispose();
+                    }
+
+                    _logger.LogDebug("Disposed EasyNetQ bus");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Exception while disposing EasyNetQ bus");
+                }
+            }
+
+            return;
         }
     }
 }

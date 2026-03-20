@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RabbitClientEasyNetQ")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69777d0bdc2f7eb741fe730b1c01c90764af81ec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92ed57c5fbdf01e7a5d54b2fa392325158b880a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("RabbitClientEasyNetQ")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RabbitClientEasyNetQ")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
