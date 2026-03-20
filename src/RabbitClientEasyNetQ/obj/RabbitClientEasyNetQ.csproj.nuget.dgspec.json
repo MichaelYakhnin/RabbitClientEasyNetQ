@@ -50,15 +50,15 @@
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[8.*, )"
+              "version": "[9.*, )"
             },
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
-              "version": "[8.*, )"
+              "version": "[9.*, )"
             },
             "Microsoft.Extensions.Options": {
               "target": "Package",
-              "version": "[8.*, )"
+              "version": "[9.*, )"
             },
             "Polly": {
               "target": "Package",

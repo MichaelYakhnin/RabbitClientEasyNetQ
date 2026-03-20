@@ -5,7 +5,7 @@ using RabbitClientEasyNetQ.Contracts;
 
 namespace RabbitClientEasyNetQ.Internal
 {
-    internal interface IEasyNetQBusAdapter : IAsyncDisposable
+    public interface IEasyNetQBusAdapter : IAsyncDisposable
     {
         Task PublishAsync<T>(T message, CancellationToken ct = default);
 

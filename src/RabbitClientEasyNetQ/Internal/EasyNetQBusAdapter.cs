@@ -11,33 +11,31 @@ namespace RabbitClientEasyNetQ.Internal
     {
         private readonly RabbitMqOptions _options;
         private readonly ILogger<EasyNetQBusAdapter> _logger;
-        // TODO: hold internal EasyNetQ IBus instance here (kept internal to avoid exposure)
 
         public EasyNetQBusAdapter(IOptions<RabbitMqOptions> options, ILogger<EasyNetQBusAdapter> logger)
         {
             _options = options?.Value ?? new RabbitMqOptions();
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            // TODO: initialize EasyNetQ IBus using connection string or options
+            // EasyNetQ wiring to be implemented in a follow-up change; keep adapter inert for now
+            _logger.LogInformation("EasyNetQBusAdapter initialized (wiring deferred)");
         }
 
         public Task PublishAsync<T>(T message, CancellationToken ct = default)
         {
-            // TODO: call EasyNetQ IBus publish APIs
-            _logger.LogDebug("Publishing message of type {Type}", typeof(T).FullName);
-            return Task.CompletedTask;
+            _logger.LogDebug("Publish requested for {Type} but adapter wiring is not implemented", typeof(T).FullName);
+            throw new NotImplementedException("EasyNetQ publish not implemented yet");
         }
 
         public Task SubscribeAsync<T>(Func<T, CancellationToken, Task> handler, SubscriptionOptions? options = null, CancellationToken ct = default)
         {
-            // TODO: wire EasyNetQ subscription and translate incoming messages to handler
-            _logger.LogDebug("Subscribing to message of type {Type}", typeof(T).FullName);
-            return Task.CompletedTask;
+            _logger.LogDebug("Subscribe requested for {Type} but adapter wiring is not implemented", typeof(T).FullName);
+            throw new NotImplementedException("EasyNetQ subscribe not implemented yet");
         }
 
         public ValueTask DisposeAsync()
         {
-            // TODO: dispose internal IBus
+            // no resources yet
             return ValueTask.CompletedTask;
         }
     }

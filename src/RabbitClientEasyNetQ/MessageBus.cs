@@ -29,7 +29,7 @@ namespace RabbitClientEasyNetQ
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
             // Wrap simple handler to adapter signature
-            return _adapter.SubscribeAsync<T>((msg, token) => handler(msg), null, ct);
+            return _adapter.SubscribeAsync<T>(async (msg, token) => await handler(msg).ConfigureAwait(false), null, ct);
         }
 
         public Task SubscribeAsync<T>(Func<T, CancellationToken, Task> handler, CancellationToken ct = default)
@@ -38,9 +38,9 @@ namespace RabbitClientEasyNetQ
             return _adapter.SubscribeAsync<T>(handler, null, ct);
         }
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
-            await _adapter.DisposeAsync().ConfigureAwait(false);
+            return _adapter.DisposeAsync();
         }
     }
 }
