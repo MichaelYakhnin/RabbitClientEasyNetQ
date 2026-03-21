@@ -19,11 +19,11 @@ namespace RabbitClientEasyNetQ.Extensions
             services.AddSingleton<IMessageBus, MessageBus>();
 
             // Ensure ILoggerFactory is resolvable; if host provides logging this will be a no-op
-            services.AddSingleton<Microsoft.Extensions.Logging.ILoggerFactory>(provider =>
-            {
-                var factory = provider.GetService<Microsoft.Extensions.Logging.ILoggerFactory>();
-                return factory ?? Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory.Instance;
-            });
+            //services.AddSingleton<Microsoft.Extensions.Logging.ILoggerFactory>(provider =>
+            //{
+            //    var factory = provider.GetService<Microsoft.Extensions.Logging.ILoggerFactory>();
+            //    return factory ?? Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory.Instance;
+            //});
 
             return services;
         }

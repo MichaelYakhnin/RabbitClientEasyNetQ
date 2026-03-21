@@ -1,10 +1,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitClientEasyNetQ", "src\RabbitClientEasyNetQ\RabbitClientEasyNetQ.csproj", "{977B97E7-5ED5-4CB0-0C67-B4757CD888A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqMessagingDemo", "RabbitMqMessagingDemo\RabbitMqMessagingDemo.csproj", "{686E7E03-51F5-3BFE-222C-00A0747D7D70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,6 +18,10 @@ Global
 		{977B97E7-5ED5-4CB0-0C67-B4757CD888A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{977B97E7-5ED5-4CB0-0C67-B4757CD888A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{977B97E7-5ED5-4CB0-0C67-B4757CD888A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{686E7E03-51F5-3BFE-222C-00A0747D7D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{686E7E03-51F5-3BFE-222C-00A0747D7D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{686E7E03-51F5-3BFE-222C-00A0747D7D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{686E7E03-51F5-3BFE-222C-00A0747D7D70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

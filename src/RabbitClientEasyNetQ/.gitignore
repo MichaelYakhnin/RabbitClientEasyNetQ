@@ -1,0 +1,49 @@
+## Ignore Visual Studio temporary files, build results, and user-specific files
+.vs/
+.vscode/
+.idea/
+
+## Build directories
+bin/
+obj/
+**/bin/
+**/obj/
+
+## Rider
+*.sln.iml
+
+## NuGet
+packages/
+*.nupkg
+*.snupkg
+
+## Publish output
+publish/
+out/
+
+## Test results
+TestResults/
+
+## Logs
+*.log
+
+## Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Rider / JetBrains
+*.idea/
+
+## OS generated files
+.DS_Store
+Thumbs.db
+
+## Misc
+*.cache
+*.pdb
+*.mdb
+
+## Docker
+docker-compose.override.yml
