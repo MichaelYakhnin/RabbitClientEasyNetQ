@@ -1,5 +1,11 @@
+using System.Collections.Generic;
+
 namespace RabbitClientEasyNetQ.Contracts
 {
+    public class RabbitMqConfigs
+    {
+        public List<RabbitMqOptions> Configs { get; set; } = new List<RabbitMqOptions>();
+    }
     public class RabbitMqOptions
     {
         public string? ConnectionString { get; set; }

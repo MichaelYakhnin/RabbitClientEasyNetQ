@@ -14,7 +14,7 @@ public static class OrderHandlers
     /// Logging handler - logs order creation events to console.
     /// This is a simple handler that demonstrates basic message consumption.
     /// </summary>
-    public static async Task LogOrderCreatedAsync(OrderCreated message, CancellationToken ct = default)
+    public static async Task LogOrderCreatedAsync(RabbitClientEasyNetQ.Contracts.OrderCreated message, CancellationToken ct = default)
     {
         // In production, this would use ILogger
         Console.WriteLine($"[LOGGING HANDLER] Order Created");
@@ -31,7 +31,7 @@ public static class OrderHandlers
     /// Notification handler - sends email notifications for new orders.
     /// This demonstrates a handler that performs external operations.
     /// </summary>
-    public static async Task SendOrderNotificationAsync(OrderCreated message, CancellationToken ct = default)
+    public static async Task SendOrderNotificationAsync(RabbitClientEasyNetQ.Contracts.OrderCreated message, CancellationToken ct = default)
     {
         // In production, this would send an email via SMTP or an email service
         Console.WriteLine($"[NOTIFICATION HANDLER] Sending order notification");
@@ -47,7 +47,7 @@ public static class OrderHandlers
     /// Inventory processing handler - reserves inventory for new orders.
     /// This demonstrates a handler that performs business logic operations.
     /// </summary>
-    public static async Task ProcessOrderInventoryAsync(OrderCreated message, CancellationToken ct = default)
+    public static async Task ProcessOrderInventoryAsync(RabbitClientEasyNetQ.Contracts.OrderCreated message, CancellationToken ct = default)
     {
         // In production, this would call an inventory service
         Console.WriteLine($"[INVENTORY HANDLER] Processing order inventory");
@@ -70,7 +70,7 @@ public static class OrderHandlers
     /// Analytics handler - tracks order creation events for analytics.
     /// This demonstrates a handler that performs analytics operations.
     /// </summary>
-    public static async Task TrackOrderAnalyticsAsync(OrderCreated message, CancellationToken ct = default)
+    public static async Task TrackOrderAnalyticsAsync(RabbitClientEasyNetQ.Contracts.OrderCreated message, CancellationToken ct = default)
     {
         // In production, this would call an analytics service
         Console.WriteLine($"[ANALYTICS HANDLER] Tracking order creation event");

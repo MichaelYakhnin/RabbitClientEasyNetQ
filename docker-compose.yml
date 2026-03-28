@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  order-api:
+    build:
+      context: .
+      dockerfile: src/services/order-api/Dockerfile
+    environment:
+      - RABBITMQ_CONNECTION_STRING=host=rabbitmq;port=5672;virtualHost=/;username=guest;password=guest;requestedHeartbeat=60
+    ports:
+      - "5000:8080"
+    depends_on:
+      - rabbitmq
+
+  order-worker:
+    build:
+      context: .
+      dockerfile: src/services/order-worker/Dockerfile
+    environment:
+      - RABBITMQ_CONNECTION_STRING=host=rabbitmq;port=5672;virtualHost=/;username=guest;password=guest;requestedHeartbeat=60
+    depends_on:
+      - rabbitmq
+
+volumes:
+  rabbitmq-data:

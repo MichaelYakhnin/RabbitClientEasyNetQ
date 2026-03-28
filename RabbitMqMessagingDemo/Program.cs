@@ -12,7 +12,6 @@ using RabbitClientEasyNetQ;
 using RabbitClientEasyNetQ.Extensions;
 using EasyNetQ;
 using RabbitMqMessagingDemo.Handlers;
-using RabbitMqMessagingDemo.Messages;
 
 namespace RabbitMqMessagingDemo;
 
